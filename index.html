@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico" />
+
+    <!-- ─── Primary SEO ──────────────────────────────────────────── -->
+    <title>LiveMarkdown — Free Online Markdown Editor & Live Previewer | Math, Diagrams, Code</title>
+    <meta name="description"
+        content="LiveMarkdown is a free browser-based Markdown editor with real-time preview, syntax highlighting, LaTeX math (KaTeX), Mermaid diagrams, dark mode, and export to HTML or PDF. No install required." />
+    <meta name="keywords"
+        content="markdown editor online, markdown live preview, online markdown previewer, markdown to html converter, free markdown editor, katex math markdown, mermaid diagram editor, markdown dark mode, export markdown pdf, markdown syntax highlighting, github readme editor, technical writing tool" />
+    <meta name="author" content="Forhad Khan" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://livemarkdown.github.io/" />
+
+    <!-- ─── Open Graph (Facebook, LinkedIn) ─────────────────────── -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://livemarkdown.github.io/" />
+    <meta property="og:title" content="LiveMarkdown — Online Markdown Editor with Live Preview" />
+    <meta property="og:description"
+        content="Write Markdown and see a live preview instantly. Supports LaTeX math, Mermaid diagrams, syntax highlighting, dark mode, and export to HTML, PDF, or .md file." />
+    <meta property="og:image" content="https://livemarkdown.github.io/assets/images/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="LiveMarkdown" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- ─── Twitter Card ─────────────────────────────────────────── -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://livemarkdown.github.io/" />
+    <meta name="twitter:title" content="LiveMarkdown — Online Markdown Editor with Live Preview" />
+    <meta name="twitter:description"
+        content="Write Markdown and see a live preview instantly. Supports LaTeX math, Mermaid diagrams, syntax highlighting, dark mode, and export to HTML, PDF, or .md file." />
+    <meta name="twitter:image" content="https://livemarkdown.github.io/assets/images/og-image.png" />
+    <meta name="twitter:site" content="@forhadkhan" />
+    <meta name="twitter:creator" content="@forhadkhan" />
+
+    <!-- ─── Schema.org Structured Data ──────────────────────────── -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "LiveMarkdown",
+      "url": "https://livemarkdown.github.io",
+      "author": {
+        "@type": "Person",
+        "name": "Forhad Khan",
+        "url": "https://forhadkhan.com"
+      },
+      "license": "https://opensource.org/licenses/MIT",
+      "copyrightHolder": {
+        "@type": "Person",
+        "name": "Forhad Khan"
+      },
+      "description": "Free online Markdown editor with real-time preview, LaTeX math (KaTeX), Mermaid diagrams, syntax highlighting, dark mode, drag & drop, and export to HTML or PDF.",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Any (Browser-based)",
+      "browserRequirements": "Requires JavaScript",
+      "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "Real-time Markdown preview",
+        "LaTeX math rendering via KaTeX",
+        "Mermaid diagram support",
+        "Syntax highlighting via highlight.js",
+        "Find and replace in editor",
+        "Dark mode and light mode",
+        "Export to Markdown, HTML, PDF",
+        "Drag and drop file open",
+        "Auto-save to localStorage",
+        "Synchronized scroll",
+        "Preview font and size controls",
+        "Spell check toggle",
+        "Keyboard shortcuts panel",
+        "Responsive design for mobile and desktop"
+      ]
+    }
+    </script>
+
+    <!-- ─── PWA / Browser hints ───────────────────────────────────── -->
+    <meta name="theme-color" content="#0d1117" />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="application-name" content="LiveMarkdown" />
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="./style.css" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;1,400&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Syne:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+
+    <!-- highlight.js -->
+    <link rel="stylesheet" id="hljs-theme-dark"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" />
+    <link rel="stylesheet" id="hljs-theme-light"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css" disabled />
+
+    <!-- KaTeX -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css" />
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.6.1/mermaid.min.js"></script>
+</head>
+
+
+<body>
+    <nav id="navbar">
+        <div class="nav-logo">Live<span>Markdown</span></div>
+
+        <!-- Left Group -->
+        <div class="nav-group">
+            <button id="sync-btn" class="btn active" title="Sync Scroll">
+                <!-- Sync Scroll Icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+                    <path d="M3 3v5h5" />
+                    <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16" />
+                    <path d="M16 16h5v5" />
+                    <circle cx="12" cy="12" r="1" />
+                </svg>
+                <span>Sync Scroll</span>
+            </button>
+
+            <button class="btn" id="btn-sample" title="Load sample content">
+                <!-- Sample Content Icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path
+                        d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" />
+                    <path d="M14 2v5a1 1 0 0 0 1 1h5" />
+                    <path d="M10 9H8" />
+                    <path d="M16 13H8" />
+                    <path d="M16 17H8" />
+                </svg>
+                <span>Sample</span>
+            </button>
+
+            <button class="btn" id="btn-format" title="Format Markdown">
+                <!-- Format Icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path
+                        d="M4 12.15V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.706.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2h-3.35" />
+                    <path d="M14 2v5a1 1 0 0 0 1 1h5" />
+                    <path d="m5 16-3 3 3 3" />
+                    <path d="m9 22 3-3-3-3" />
+                </svg>
+                <span>Format</span>
+            </button>
+
+            <button class="btn btn-danger" id="btn-clear" title="Clear editor">
+                <!-- Trash Icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
+                    <path d="M3 6h18" />
+                    <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                </svg>
+                <span>Clear</span>
+            </button>
+        </div>
+
+        <div class="nav-spacer"></div>
+
+        <!-- Right Group -->
+        <div class="nav-group">
+
+            <!-- Open File -->
+            <label class="btn btn-icon" title="Open file" style="cursor:pointer">
+                <!-- Open Folder Icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path
+                        d="m6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2" />
+                </svg>
+                <span class="btn-label">Open</span>
+                <input type="file" id="file-open" accept=".md,.txt,.markdown" style="display:none" />
+            </label>
+
+            <!-- Layout Dropdown -->
+            <div class="dropdown">
+                <button class="btn btn-icon" id="layout-btn" title="Layout Mode">
+                    <span id="current-layout-icon">
+                        <!-- Layout Selection Icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 3v18" />
+                            <path d="M3 12h18" />
+                            <rect x="3" y="3" width="18" height="18" rx="2" />
+                        </svg>
+                    </span>
+                    <span class="btn-label">Layout</span>
+                    <!-- Chevron Down Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="m6 9 6 6 6-6" />
+                    </svg>
+                    </span>
+                </button>
+                <div id="layout-menu" class="dropdown-content right">
+                    <button class="dropdown-item active" id="layout-lr" title="Editor left, Preview right">
+                        <svg viewBox="0 0 20 14" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <rect x="1" y="1" width="8" height="12" rx="1" />
+                            <rect x="11" y="1" width="8" height="12" rx="1" />
+                        </svg>
+                        Editor Left
+                    </button>
+                    <button class="dropdown-item" id="layout-rl" title="Preview left, Editor right">
+                        <svg viewBox="0 0 20 14" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <rect x="1" y="1" width="8" height="12" rx="1" stroke="var(--accent2)" />
+                            <rect x="11" y="1" width="8" height="12" rx="1" />
+                        </svg>
+                        Editor Right
+                    </button>
+                    <button class="dropdown-item" id="layout-tb" title="Editor top, Preview bottom">
+                        <svg viewBox="0 0 14 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <rect x="1" y="1" width="12" height="8" rx="1" />
+                            <rect x="1" y="11" width="12" height="8" rx="1" />
+                        </svg>
+                        Editor Top
+                    </button>
+                    <button class="dropdown-item" id="layout-bt" title="Preview top, Editor bottom">
+                        <svg viewBox="0 0 14 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <rect x="1" y="1" width="12" height="8" rx="1" stroke="var(--accent2)" />
+                            <rect x="1" y="11" width="12" height="8" rx="1" />
+                        </svg>
+                        Editor Bottom
+                    </button>
+                </div>
+            </div>
+
+            <!-- Export Dropdown -->
+            <div class="dropdown">
+                <button class="btn btn-icon" id="export-btn" title="Export">
+                    <!-- Download Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 15V3" />
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                        <path d="m7 10 5 5 5-5" />
+                    </svg>
+                    <span class="btn-label">Export</span>
+                    <!-- Chevron Down Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="m6 9 6 6 6-6" />
+                    </svg>
+                    </span>
+                </button>
+                <div id="export-menu" class="dropdown-content right">
+                    <button class="dropdown-item export-item" data-fmt="md">
+                        <svg viewBox="0 0 16 16" fill="currentColor">
+                            <path
+                                d="M14.85 3H1.15C.52 3 0 3.52 0 4.15v7.69C0 12.48.52 13 1.15 13h13.69c.64 0 1.15-.52 1.15-1.15v-7.7C16 3.52 15.48 3 14.85 3zm-3.7 9H9.07V8.24l-1.4 1.8-1.4-1.8V12H4.18V4.78h2.1l1.4 1.8 1.4-1.8h2.08V12zm3.54-3.97h-1.97V4.78h-2.08V7h1.95v2.06h-1.95V12h2.05v-2.97z" />
+                        </svg>
+                        Markdown (.md)
+                    </button>
+                    <button class="dropdown-item export-item" data-fmt="html">
+                        <svg viewBox="0 0 16 16" fill="currentColor">
+                            <path
+                                d="M.254 3.304L2.5 13.146l5.5 1.854 5.5-1.854 2.246-9.842H.254zm11.6 3.535-4.854.857-.112 1.293 4.69-.003-.454 4.218-3.124.845-3.107-.844-.21-2.393H6.16l.11 2.552 2.48.655 2.49-.655.244-3.016-7.362.008.578-6.497 6.984-.857.654 1.837z" />
+                        </svg>
+                        HTML (.html)
+                    </button>
+                    <button class="dropdown-item export-item" data-fmt="pdf">
+                        <svg viewBox="0 0 16 16" fill="currentColor">
+                            <path
+                                d="M5.523 12.424c.14-.082.293-.162.459-.238a7.878 7.878 0 0 1-.45.606c-.28.337-.498.516-.635.516a.035.035 0 0 1-.026-.01.311.311 0 0 1-.044-.17c0-.122.03-.277.08-.448l.017-.061zm4.139-5.595c-.232.236-.475.44-.717.619-.233.176-.457.327-.666.448a5.08 5.08 0 0 0 .1-.457 4.04 4.04 0 0 0 .046-.622 2.7 2.7 0 0 0-.1-.76.7.7 0 0 0-.269-.451l-.059-.028a.668.668 0 0 0-.336-.067c-.344 0-.476.194-.476.46 0 .254.057.564.15.905.094.344.224.706.387 1.067zm-3.804.37c.038-.116.078-.23.12-.344.041-.114.082-.226.123-.334a2.1 2.1 0 0 1 .176-.376.994.994 0 0 1 .222-.263.523.523 0 0 1 .297-.087c.15 0 .223.086.223.258 0 .175-.04.396-.12.66a4.625 4.625 0 0 1-.256.695 5.063 5.063 0 0 1-.198.377l-.07-.033a1.98 1.98 0 0 1-.517.327zM14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z" />
+                        </svg>
+                        PDF (print)
+                    </button>
+                </div>
+            </div>
+
+            <!-- Theme Toggle -->
+            <button class="btn btn-icon" id="theme-btn" title="Toggle theme">
+                <!-- Moon Icon -->
+                <svg id="icon-moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path
+                        d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401" />
+                </svg>
+                <!-- Sun Icon -->
+                <svg id="icon-sun" style="display:none" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="4" />
+                    <path d="M12 2v2" />
+                    <path d="M12 20v2" />
+                    <path d="m4.93 4.93 1.41 1.41" />
+                    <path d="m17.66 17.66 1.41 1.41" />
+                    <path d="M2 12h2" />
+                    <path d="M20 12h2" />
+                    <path d="m6.34 17.66-1.41 1.41" />
+                    <path d="m19.07 4.93-1.41 1.41" />
+                </svg>
+            </button>
+
+            <!-- GitHub Repository -->
+            <a href="https://github.com/forhadkhan/livemarkdown" target="_blank" class="btn btn-icon"
+                title="GitHub Repository">
+                <!-- GitHub Icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path
+                        d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.28 1.15-.28 2.35 0 3.5-.73 1.02-1.08 2.25-1 3.5 0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
+                    <path d="M9 18c-4.51 2-5-2-7-2" />
+                </svg>
+            </a>
+        </div>
+    </nav>
+
+    <!-- ─── Main ───────────────────────────────────────────────── -->
+    <div id="main" class="layout-h">
+
+        <!-- Editor Pane -->
+        <div class="pane" id="editor-pane">
+            <div class="pane-header">
+                <div class="pane-header-label">
+                    <div class="pane-dot" style="background:var(--accent)"></div>
+                    EDITOR
+                </div>
+                <div class="pane-actions">
+                    <button class="pane-btn" id="btn-fullscreen-editor" title="Fullscreen editor">
+                        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M1 4V1h3M8 1h3v3M11 8v3H8M4 11H1V8" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- ─── Toolbar ─────────────────────────────────────────────── -->
+            <div id="toolbar">
+                <button class="tb-btn" data-tip="Bold" onclick="wrapText('**','**')">
+                    <!-- Bold Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M6 12h9a4 4 0 0 1 0 8H7a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h7a4 4 0 0 1 0 8" />
+                    </svg></button>
+                <button class="tb-btn" data-tip="Italic" onclick="wrapText('*','*')">
+                    <!-- Italic Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="19" x2="10" y1="4" y2="4" />
+                        <line x1="14" x2="5" y1="20" y2="20" />
+                        <line x1="15" x2="9" y1="4" y2="20" />
+                    </svg></button>
+                <button class="tb-btn" data-tip="Strikethrough" onclick="wrapText('~~','~~')">
+                    <!-- Strikethrough Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M16 4H9a3 3 0 0 0-2.83 4" />
+                        <path d="M14 12a4 4 0 0 1 0 8H6" />
+                        <line x1="4" x2="20" y1="12" y2="12" />
+                    </svg></button>
+                <button class="tb-btn" data-tip="Code" onclick="wrapText('`','`')">
+                    <!-- Inline Code Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="m16 18 6-6-6-6" />
+                        <path d="m8 6-6 6 6 6" />
+                    </svg></button>
+                <button class="tb-btn" data-tip="Code block" onclick="wrapBlock('```\n','\n```')">
+                    <!-- Code Block Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="m10 9-3 3 3 3" />
+                        <path d="m14 15 3-3-3-3" />
+                        <rect x="3" y="3" width="18" height="18" rx="2" />
+                    </svg></button>
+                <div class="tb-sep"></div>
+                <button class="tb-btn" data-tip="Heading 1" onclick="insertHeading(1)">
+                    <!-- Heading 1 Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 12h8" />
+                        <path d="M4 18V6" />
+                        <path d="M12 18V6" />
+                        <path d="m17 12 3-2v8" />
+                    </svg></button>
+                <button class="tb-btn" data-tip="Heading 2" onclick="insertHeading(2)">
+                    <!-- Heading 2 Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 12h8" />
+                        <path d="M4 18V6" />
+                        <path d="M12 18V6" />
+                        <path d="M21 18h-4c0-4 4-3 4-6 0-1.5-2-2.5-4-1" />
+                    </svg></button>
+                <button class="tb-btn" data-tip="Heading 3" onclick="insertHeading(3)">
+                    <!-- Heading 3 Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 12h8" />
+                        <path d="M4 18V6" />
+                        <path d="M12 18V6" />
+                        <path d="M17.5 10.5c1.7-1 3.5 0 3.5 1.5a2 2 0 0 1-2 2" />
+                        <path d="M17 17.5c2 1.5 4 .3 4-1.5a2 2 0 0 0-2-2" />
+                    </svg></button>
+                <div class="tb-sep"></div>
+                <button class="tb-btn" data-tip="Unordered list" onclick="insertLine('- ')">
+                    <!-- Unordered List Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 5h.01" />
+                        <path d="M3 12h.01" />
+                        <path d="M3 19h.01" />
+                        <path d="M8 5h13" />
+                        <path d="M8 12h13" />
+                        <path d="M8 19h13" />
+                    </svg></button>
+                <button class="tb-btn" data-tip="Ordered list" onclick="insertLine('1. ')">
+                    <!-- Ordered List Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M11 5h10" />
+                        <path d="M11 12h10" />
+                        <path d="M11 19h10" />
+                        <path d="M4 4h1v5" />
+                        <path d="M4 9h2" />
+                        <path d="M6.5 20H3.4c0-1 2.6-1.925 2.6-3.5a1.5 1.5 0 0 0-2.6-1.02" />
+                    </svg></button>
+                <button class="tb-btn" data-tip="Task list" onclick="insertLine('- [ ] ')">
+                    <!-- Task List Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M13 5h8" />
+                        <path d="M13 12h8" />
+                        <path d="M13 19h8" />
+                        <path d="m3 17 2 2 4-4" />
+                        <rect x="3" y="4" width="6" height="6" rx="1" />
+                    </svg></button>
+                <div class="tb-sep"></div>
+                <button class="tb-btn" data-tip="Link" onclick="insertLink()">
+                    <!-- Link Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+                        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+                    </svg></button>
+                <button class="tb-btn" data-tip="Image" onclick="insertImage()">
+                    <!-- Image Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
+                        <circle cx="9" cy="9" r="2" />
+                        <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
+                    </svg></button>
+                <button class="tb-btn" data-tip="Blockquote" onclick="insertLine('> ')">
+                    <!-- Quote Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path
+                            d="M16 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z" />
+                        <path
+                            d="M5 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z" />
+                    </svg></button>
+                <button class="tb-btn" data-tip="Table" onclick="insertTable()">
+                    <!-- Table Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M15 3v18" />
+                        <rect width="18" height="18" x="3" y="3" rx="2" />
+                        <path d="M21 9H3" />
+                        <path d="M21 15H3" />
+                    </svg></button>
+                <button class="tb-btn" data-tip="Horizontal rule" onclick="insertLine('\n---\n')">
+                    <!-- Minus/Rule Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14" />
+                    </svg></button>
+                <div class="tb-sep"></div>
+                <button class="tb-btn" data-tip="LaTeX math" onclick="insertMath()">
+                    <!-- Sigma/Math Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path
+                            d="M18 7V5a1 1 0 0 0-1-1H6.5a.5.5 0 0 0-.4.8l4.5 6a2 2 0 0 1 0 2.4l-4.5 6a.5.5 0 0 0 .4.8H17a1 1 0 0 0 1-1v-2" />
+                    </svg></button>
+                <button class="tb-btn" data-tip="Mermaid diagram" onclick="insertMermaid()">
+                    <!-- Vector/Diagram Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M19.5 7a24 24 0 0 1 0 10" />
+                        <path d="M4.5 7a24 24 0 0 0 0 10" />
+                        <path d="M7 19.5a24 24 0 0 0 10 0" />
+                        <path d="M7 4.5a24 24 0 0 1 10 0" />
+                        <rect x="17" y="17" width="5" height="5" rx="1" />
+                        <rect x="17" y="2" width="5" height="5" rx="1" />
+                        <rect x="2" y="17" width="5" height="5" rx="1" />
+                        <rect x="2" y="2" width="5" height="5" rx="1" />
+                    </svg></button>
+                <div class="tb-spacer"></div>
+                <button class="tb-btn" id="shortcuts-btn" data-tip="Keyboard shortcuts (?)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="6" width="20" height="12" rx="2" />
+                        <path d="M6 10h.01" />
+                        <path d="M10 10h.01" />
+                        <path d="M14 10h.01" />
+                        <path d="M18 10h.01" />
+                        <path d="M8 14h8" />
+                    </svg>
+                </button>
+                <button class="tb-btn" data-tip="Find (Ctrl+F)" id="find-btn"><svg viewBox="0 0 14 14" fill="none"
+                        stroke="currentColor" stroke-width="1.5">
+                        <circle cx="6" cy="6" r="4" />
+                        <path d="M9 9l3 3" />
+                    </svg></button>
+                <div id="find-bar">
+                    <div class="find-row">
+                        <input type="text" id="find-input" placeholder="Find…" />
+                        <span class="find-count" id="find-count">0/0</span>
+                        <div class="find-actions">
+                            <button class="tb-btn" id="find-prev" title="Previous">
+                                <!-- Chevron Up Icon -->
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="m18 15-6-6-6 6" />
+                                </svg>
+                            </button>
+                            <button class="tb-btn" id="find-next" title="Next">
+                                <!-- Chevron Down Icon -->
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="m6 9 6 6 6-6" />
+                                </svg>
+                            </button>
+                            <button class="tb-btn" id="find-close" title="Close">
+                                <!-- X Icon -->
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M18 6 6 18" />
+                                    <path d="m6 6 12 12" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="replace-row" id="replace-row">
+                        <input type="text" id="replace-input" placeholder="Replace with…" />
+                        <div class="replace-actions">
+                            <button class="btn btn-sm" id="btn-replace">Replace</button>
+                            <button class="btn btn-sm" id="btn-replace-all">Replace All</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Editor and Preview Panes -->
+            <div id="editor-wrap">
+                <div id="line-numbers"></div>
+                <div id="editor-highlights" aria-hidden="true"></div>
+                <textarea id="editor" spellcheck="false" autocomplete="off" autocorrect="off"
+                    autocapitalize="off"></textarea>
+                <div id="drop-overlay">
+                    <div class="drop-overlay-inner">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                            <polyline points="17 8 12 3 7 8" />
+                            <line x1="12" y1="3" x2="12" y2="15" />
+                        </svg>
+                        <span>Drop .md or .txt file</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Status Bar -->
+            <div id="status-bar">
+                <div class="status-item">
+                    <span class="status-label">Ln</span>
+                    <span class="status-val" id="wc-ln">1</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Col</span>
+                    <span class="status-val" id="wc-col">1</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Words</span>
+                    <span class="status-val" id="wc-words">0</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Chars</span>
+                    <span class="status-val" id="wc-chars">0</span>
+                </div>
+                <div class="status-item status-reading">
+                    <span class="status-val" id="wc-reading">~0 min read</span>
+                </div>
+                <div class="status-spacer"></div>
+                <button id="spellcheck-btn" class="status-btn" title="Toggle spell check">Spell: OFF</button>
+            </div>
+        </div>
+
+        <!-- Divider -->
+        <div id="divider"></div>
+
+        <!-- Preview Pane -->
+        <div class="pane" id="preview-pane">
+            <div class="pane-header">
+                <div class="pane-header-label">
+                    <div class="pane-dot" style="background:var(--accent2)"></div>
+                    PREVIEW
+                </div>
+                <div class="preview-font-controls">
+                    <select id="preview-font-select" title="Preview font family">
+                        <option value="serif">Serif</option>
+                        <option value="sans">Sans</option>
+                        <option value="mono">Mono</option>
+                    </select>
+                    <input type="range" id="preview-font-size" min="13" max="22" value="17" title="Font size" />
+                    <span id="preview-font-size-label" class="status-val">17px</span>
+                </div>
+                <div class="pane-actions">
+                    <button class="pane-btn" id="btn-fullscreen-preview" title="Fullscreen preview">
+                        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M1 4V1h3M8 1h3v3M11 8v3H8M4 11H1V8" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div id="preview-scroll">
+                <div id="preview-content">
+                    <div id="preview" class="markdown-body"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ─── Modal ────────────────────────────────────────────────── -->
+    <div id="modal-overlay">
+        <div id="modal">
+            <div class="modal-title" id="modal-title">Confirm</div>
+            <div class="modal-body" id="modal-body">Are you sure?</div>
+            <div class="modal-actions" id="modal-actions"></div>
+        </div>
+    </div>
+
+    <!-- ─── Toast ────────────────────────────────────────────────── -->
+    <div id="toast"></div>
+
+    <!-- Scripts -->
+    <script src="./sample.js"></script>
+    <script src="./script.js"></script>
+
+</body>
+
+</html>
