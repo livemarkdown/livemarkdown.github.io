@@ -1,0 +1,17 @@
+/* TEAM */
+Developer: Forhad Khan
+Site: https://forhadkhan.com
+GitHub: https://github.com/forhadkhan
+
+/* THANKS */
+AI Assistance: Claude 4.6 Sonnet (Anthropic) — https://anthropic.com
+AI Assistance: Gemini 3 Flash (Google) — https://deepmind.google
+
+/* SITE */
+Last update: 2026-03-20
+Language: English
+Doctype: HTML5
+IDE: Antigravity
+Standards: HTML5, CSS3, ES6+
+Repository: https://github.com/forhadkhan/livemarkdown
+Hosted via: https://github.com/livemarkdown/livemarkdown.github.io

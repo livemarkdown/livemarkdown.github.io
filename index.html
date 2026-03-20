@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico" />
 
     <!-- ─── Primary SEO ──────────────────────────────────────────── -->
     <title>LiveMarkdown — Free Online Markdown Editor & Live Previewer | Math, Diagrams, Code</title>
@@ -12,9 +11,13 @@
         content="LiveMarkdown is a free browser-based Markdown editor with real-time preview, syntax highlighting, LaTeX math (KaTeX), Mermaid diagrams, dark mode, and export to HTML or PDF. No install required." />
     <meta name="keywords"
         content="markdown editor online, markdown live preview, online markdown previewer, markdown to html converter, free markdown editor, katex math markdown, mermaid diagram editor, markdown dark mode, export markdown pdf, markdown syntax highlighting, github readme editor, technical writing tool" />
-    <meta name="author" content="Forhad Khan" />
+    <meta name="author" content="LiveMarkdown" />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://livemarkdown.github.io/" />
+
+    <!-- ─── Crawlers & Discovery ──────────────────────────────────── -->
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+    <link rel="humans" type="text/plain" href="/humans.txt" />
 
     <!-- ─── Open Graph (Facebook, LinkedIn) ─────────────────────── -->
     <meta property="og:type" content="website" />
@@ -22,7 +25,7 @@
     <meta property="og:title" content="LiveMarkdown — Online Markdown Editor with Live Preview" />
     <meta property="og:description"
         content="Write Markdown and see a live preview instantly. Supports LaTeX math, Mermaid diagrams, syntax highlighting, dark mode, and export to HTML, PDF, or .md file." />
-    <meta property="og:image" content="https://livemarkdown.github.io/assets/images/og-image.png" />
+    <meta property="og:image" content="https://livemarkdown.github.io/og-image.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:site_name" content="LiveMarkdown" />
@@ -34,9 +37,7 @@
     <meta name="twitter:title" content="LiveMarkdown — Online Markdown Editor with Live Preview" />
     <meta name="twitter:description"
         content="Write Markdown and see a live preview instantly. Supports LaTeX math, Mermaid diagrams, syntax highlighting, dark mode, and export to HTML, PDF, or .md file." />
-    <meta name="twitter:image" content="https://livemarkdown.github.io/assets/images/og-image.png" />
-    <meta name="twitter:site" content="@forhadkhan" />
-    <meta name="twitter:creator" content="@forhadkhan" />
+    <meta name="twitter:image" content="https://livemarkdown.github.io/og-image.png" />
 
     <!-- ─── Schema.org Structured Data ──────────────────────────── -->
     <script type="application/ld+json">
@@ -44,80 +45,34 @@
       "@context": "https://schema.org",
       "@type": "WebApplication",
       "name": "LiveMarkdown",
-      "alternateName": "LiveMarkdown Editor",
       "url": "https://livemarkdown.github.io",
       "description": "Free online Markdown editor with real-time preview, LaTeX math (KaTeX), Mermaid diagrams, syntax highlighting, dark mode, drag & drop, and export to HTML or PDF.",
       "applicationCategory": "DeveloperApplication",
-      "applicationSubCategory": "Markdown Editor",
-      "operatingSystem": "Any",
-      "browserRequirements": "Requires JavaScript. Works in modern browsers.",
+      "operatingSystem": "Any (Browser-based)",
+      "browserRequirements": "Requires JavaScript",
       "inLanguage": "en",
       "isAccessibleForFree": true,
-      "creator": {
-        "@type": "Person",
-        "name": "Forhad Khan",
-        "url": "https://forhadkhan.com"
-      },
-      "author": {
-        "@type": "Person",
-        "name": "Forhad Khan"
-      },
-      "copyrightHolder": {
-        "@type": "Person",
-        "name": "Forhad Khan"
-      },
-      "license": "https://opensource.org/licenses/MIT",
       "offers": {
         "@type": "Offer",
         "price": "0",
         "priceCurrency": "USD"
       },
-      "image": "https://livemarkdown.github.io/assets/images/og-image.png",
-      "screenshot": "https://livemarkdown.github.io/assets/images/og-image.png",
       "featureList": [
         "Real-time Markdown preview",
         "LaTeX math rendering via KaTeX",
         "Mermaid diagram support",
-        "Syntax highlighting",
-        "Find and replace",
-        "Dark and light mode",
+        "Syntax highlighting via highlight.js",
+        "Find and replace in editor",
+        "Dark mode and light mode",
         "Export to Markdown, HTML, PDF",
-        "Drag and drop file support",
-        "Auto-save",
-        "Synchronized scrolling",
-        "Custom preview controls",
+        "Drag and drop file open",
+        "Auto-save to localStorage",
+        "Synchronized scroll",
+        "Preview font and size controls",
         "Spell check toggle",
-        "Keyboard shortcuts",
-        "Responsive design"
-      ],
-      "sameAs": [
-        "https://github.com/forhadkhan/livemarkdown"
+        "Keyboard shortcuts panel",
+        "Responsive design for mobile and desktop"
       ]
-    }
-    </script>
-
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "LiveMarkdown",
-      "url": "https://livemarkdown.github.io",
-      "description": "Free online Markdown editor with live preview, LaTeX math, Mermaid diagrams, and export options.",
-      "inLanguage": "en",
-      "author": {
-        "@type": "Person",
-        "name": "Forhad Khan",
-        "url": "https://forhadkhan.com"
-      },
-      "publisher": {
-        "@type": "Person",
-        "name": "Forhad Khan"
-      },
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "https://livemarkdown.github.io/?q={search_term_string}",
-        "query-input": "required name=search_term_string"
-      }
     }
     </script>
 
@@ -151,7 +106,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.6.1/mermaid.min.js"></script>
 </head>
-
 
 <body>
     <nav id="navbar">
@@ -346,20 +300,9 @@
                     <path d="m19.07 4.93-1.41 1.41" />
                 </svg>
             </button>
-
-            <!-- GitHub Repository -->
-            <a href="https://github.com/forhadkhan/livemarkdown" target="_blank" class="btn btn-icon"
-                title="GitHub Repository">
-                <!-- GitHub Icon -->
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path
-                        d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.28 1.15-.28 2.35 0 3.5-.73 1.02-1.08 2.25-1 3.5 0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
-                    <path d="M9 18c-4.51 2-5-2-7-2" />
-                </svg>
-            </a>
         </div>
     </nav>
+
 
     <!-- ─── Main ───────────────────────────────────────────────── -->
     <div id="main" class="layout-h">

@@ -1,0 +1,54 @@
+# LiveMarkdown
+
+> A free, browser-based Markdown editor with real-time preview, LaTeX math, Mermaid diagrams, syntax highlighting, and export to HTML or PDF. No installation or account required.
+
+## What is LiveMarkdown?
+
+LiveMarkdown is a single-page web application that runs entirely in the browser. It provides a split-pane interface: a plain-text Markdown editor on one side and a rendered live preview on the other.
+
+It is built for developers, technical writers, students, and anyone who writes in Markdown. It requires no backend, no account, and no installation — open the page and start writing.
+
+## Core features
+
+- Real-time Markdown rendering (120ms debounce) via marked.js (GFM)
+- Syntax highlighting for 100+ programming languages via highlight.js
+- LaTeX math equations — inline `$…$` and display `$$…$$` via KaTeX
+- Mermaid diagrams — flowchart, sequence, pie, git, and more
+- Find & replace with live highlight overlay in the editor
+- Export to `.md`, self-contained `.html`, and PDF (browser print)
+- Drag & drop `.md` / `.txt` file open
+- Auto-save to localStorage (content restored on reload)
+- 4 layout modes: editor left, right, top, bottom
+- Synchronized scrolling between editor and preview
+- Dark mode and light mode
+- Preview font family (Serif / Sans / Mono) and size controls
+- Spell check toggle
+- Keyboard shortcuts panel
+
+## Technology
+
+- Vanilla JavaScript (ES6+), HTML5, CSS3 — no framework, no build step
+- Marked.js (Markdown parsing)
+- Highlight.js (syntax highlighting)
+- KaTeX (math rendering)
+- Mermaid.js (diagram rendering)
+
+## Usage
+
+Open https://livemarkdown.github.io/ in any modern browser. Type Markdown in the left pane, see the rendered output in the right pane instantly. No login required.
+
+## License
+
+MIT — free to use, fork, and contribute.
+
+## Source
+
+https://github.com/forhadkhan/livemarkdown
+
+## Contact / Contributions
+
+Pull requests welcome via the main repository. See README.md for contributing guidelines.
+
+## Mirror (GitHub Pages host)
+
+https://github.com/livemarkdown/livemarkdown.github.io
