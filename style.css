@@ -1137,6 +1137,22 @@ body.fullscreen-preview #toolbar {
     #status-bar {
         display: none !important;
     }
+
+    #toolbar {
+        height: auto;
+        flex-wrap: wrap;
+        padding: 6px 10px;
+        gap: 4px;
+    }
+
+    .tb-sep, 
+    .tb-spacer {
+        display: none;
+    }
+}
+
+.border {
+    border: 1px solid var(--border);
 }
 
 /* ─── Animations ─────────────────────────────────────────────── */
