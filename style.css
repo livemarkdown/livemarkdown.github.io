@@ -1133,6 +1133,10 @@ body.fullscreen-preview #toolbar {
     #preview-content {
         padding: 16px 16px 40px
     }
+
+    #status-bar {
+        display: none !important;
+    }
 }
 
 /* ─── Animations ─────────────────────────────────────────────── */
