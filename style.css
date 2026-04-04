@@ -1122,8 +1122,19 @@ body.fullscreen-preview #toolbar {
     #main.layout-h #divider,
     #main.layout-h.flipped #divider {
         width: 100%;
-        height: 4px;
+        height: 6px;
         cursor: row-resize;
+    }
+
+    #divider::after {
+        width: 32px;
+        height: 2px;
+    }
+
+    #divider:hover::after,
+    #divider.dragging::after {
+        width: 48px;
+        height: 4px;
     }
 
     .nav-logo {
