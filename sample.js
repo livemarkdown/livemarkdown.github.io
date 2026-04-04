@@ -138,7 +138,17 @@ pie title Tech Stack Distribution
 
 ## Links & Images
 
-Visit [Anthropic](https://anthropic.com) or check the [Markdown Guide](https://markdownguide.org).
+View the [source on GitHub](https://github.com/forhadkhan/livemarkdown).
+
+Developed by [Forhad Khan](https://forhadkhan.com).
+
+![FK Logo](https://f0rhad.github.io/assets/fk-blue-gradient.jpg)
+
+---
+
+# H1
+## H2
+### H3
 
 ---
 

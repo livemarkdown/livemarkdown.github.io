@@ -259,23 +259,18 @@ body {
     justify-content: center;
 }
 
+
 .btn-label {
-    display: none;
+    display: inline;
+    margin-left: 6px;
+    font-weight: 500;
+    font-size: 13px;
 }
 
-@media (min-width: 1024px) {
-    .btn-icon {
-        width: auto;
-        padding: 5px 12px;
-        aspect-ratio: auto;
-    }
-
-    .btn-label {
-        display: inline;
-        margin-left: 6px;
-        font-weight: 500;
-        font-size: 13px;
-    }
+.btn-icon {
+    width: auto;
+    padding: 5px 12px;
+    aspect-ratio: auto;
 }
 
 #current-layout-icon {
@@ -309,6 +304,10 @@ body {
     background: var(--success);
     color: #fff;
     border-color: var(--success)
+}
+
+#mobile-menu-btn {
+    display: none;
 }
 
 /* layout toggle group */
@@ -715,14 +714,14 @@ body.dragging.layout-v {
 }
 
 .markdown-body a {
-    color: var(--accent2);
+    color: var(--accent);
     text-decoration: none;
     border-bottom: 1px solid transparent;
     transition: border-color var(--transition)
 }
 
 .markdown-body a:hover {
-    border-bottom-color: var(--accent2)
+    border-bottom-color: var(--accent)
 }
 
 .markdown-body strong {
@@ -1081,7 +1080,33 @@ body.fullscreen-preview #toolbar {
 }
 
 /* ─── Responsive ─────────────────────────────────────────────── */
-@media(max-width:768px) {
+@media(max-width:920px) {
+    #navbar {
+        height: auto;
+        flex-wrap: wrap;
+        padding: 8px 12px;
+    }
+
+    #mobile-menu-btn {
+        display: inline-flex;
+        margin-left: auto;
+    }
+
+    .nav-spacer {
+        display: none;
+    }
+
+    .nav-group {
+        width: 100%;
+        justify-content: center;
+        margin-top: 8px;
+        flex-wrap: wrap;
+        display: none;
+    }
+
+    #navbar.menu-open .nav-group {
+        display: flex;
+    }
 
     #main.layout-h,
     #main.layout-h.flipped {
@@ -1097,21 +1122,48 @@ body.fullscreen-preview #toolbar {
     #main.layout-h #divider,
     #main.layout-h.flipped #divider {
         width: 100%;
-        height: 4px;
+        height: 6px;
         cursor: row-resize;
+    }
+
+    #divider::after {
+        width: 32px;
+        height: 2px;
+    }
+
+    #divider:hover::after,
+    #divider.dragging::after {
+        width: 48px;
+        height: 4px;
     }
 
     .nav-logo {
         font-size: 14px
     }
 
-    .btn span {
-        display: none
-    }
-
     #preview-content {
         padding: 16px 16px 40px
     }
+
+    #status-bar {
+        display: none !important;
+    }
+
+    #toolbar {
+        height: auto;
+        flex-wrap: wrap;
+        padding: 6px 10px;
+        gap: 4px;
+    }
+
+    .tb-sep, 
+    .tb-spacer {
+        display: none;
+    }
+}
+
+.border {
+    border: 1px solid var(--border);
 }
 
 /* ─── Animations ─────────────────────────────────────────────── */

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- Favicon -->
-    <link rel="icon" href="/assets/images/favicon.ico" />
+    <link rel="icon" href="https://f0rhad.github.io/assets/favicon.ico" />
 
     <!-- ─── Primary SEO ──────────────────────────────────────────── -->
     <title>LiveMarkdown - Free Online Markdown Editor & Live Previewer | Math, Diagrams, Code</title>
@@ -113,6 +113,15 @@
 <body>
     <nav id="navbar">
         <div class="nav-logo">Live<span>Markdown</span></div>
+        <button id="mobile-menu-btn" class="btn btn-icon" title="Menu">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="lucide lucide-menu">
+                <path d="M4 5h16" />
+                <path d="M4 12h16" />
+                <path d="M4 19h16" />
+            </svg>
+        </button>
 
         <!-- Left Group -->
         <div class="nav-group">
@@ -317,10 +326,20 @@
                     <div class="pane-dot" style="background:var(--accent)"></div>
                     EDITOR
                 </div>
+                <!-- Fullscreen button -->
                 <div class="pane-actions">
                     <button class="pane-btn" id="btn-fullscreen-editor" title="Fullscreen editor">
                         <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5">
                             <path d="M1 4V1h3M8 1h3v3M11 8v3H8M4 11H1V8" />
+                        </svg>
+                    </button>
+                </div>
+                <!-- Toolbar hide/show button -->
+                <div class="pane-actions">
+                    <button class="pane-btn border" id="btn-toggle-toolbar" title="Toggle toolbar">
+                        <svg id="toolbar-toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m18 15-6-6-6 6" />
                         </svg>
                     </button>
                 </div>
