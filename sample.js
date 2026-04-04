@@ -142,7 +142,7 @@ View the [source on GitHub](https://github.com/forhadkhan/livemarkdown).
 
 Developed by [Forhad Khan](https://forhadkhan.com).
 
-![FK Logo](https://f0rhad.github.io/assets/fk-blue-gradient.jpg)
+![FK Logo](https://f0rhad.github.io/assets/fk-400sqpx.jpg)
 
 ---
 
