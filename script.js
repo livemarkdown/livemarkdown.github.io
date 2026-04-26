@@ -188,6 +188,7 @@ previewScroll.addEventListener('scroll', () => {
 document.getElementById('sync-btn').addEventListener('click', function () {
     syncEnabled = !syncEnabled;
     this.classList.toggle('active', syncEnabled);
+    localStorage.setItem('livemark_sync_enabled', syncEnabled);
     showToast(syncEnabled ? 'Sync scroll ON' : 'Sync scroll OFF');
 });
 
@@ -575,6 +576,8 @@ function setLayout(type, flip) {
     main.classList.add('layout-' + type);
     if (flip) main.classList.add('flipped');
     currentLayout = type; isFlipped = !!flip;
+    localStorage.setItem('livemark_layout', type);
+    localStorage.setItem('livemark_flipped', flip);
     // Update mermaid (needs rerender after layout change)
     renderPreview();
 }
@@ -660,6 +663,7 @@ document.getElementById('theme-btn').addEventListener('click', () => {
     // mermaid re-theme
     mermaid.initialize({ startOnLoad: false, theme: currentTheme === 'dark' ? 'dark' : 'default', securityLevel: 'loose' });
     renderPreview();
+    localStorage.setItem('livemark_theme', currentTheme);
     showToast(currentTheme === 'dark' ? '🌙 Dark mode' : '☀️ Light mode');
 });
 
@@ -719,6 +723,7 @@ document.getElementById('spellcheck-btn').addEventListener('click', function () 
     editor.focus();
     this.textContent = `Spell: ${spellCheckEnabled ? 'ON' : 'OFF'}`;
     this.classList.toggle('active', spellCheckEnabled);
+    localStorage.setItem('livemark_spell_check_enabled', spellCheckEnabled);
     showToast(`Spell check ${spellCheckEnabled ? 'enabled' : 'disabled'}`);
 });
 
@@ -797,12 +802,14 @@ const fontFamilyMap = {
 
 document.getElementById('preview-font-select').addEventListener('change', function () {
     document.getElementById('preview').style.fontFamily = fontFamilyMap[this.value];
+    localStorage.setItem('livemark_font_family', this.value);
 });
 
 document.getElementById('preview-font-size').addEventListener('input', function () {
     const size = parseInt(this.value);
     document.getElementById('preview').style.fontSize = size + 'px';
     document.getElementById('preview-font-size-label').textContent = size + 'px';
+    localStorage.setItem('livemark_font_size', this.value);
 });
 
 /* ─── Dropdowns ──────────────────────────────────────────────── */
@@ -1199,6 +1206,64 @@ if (toggleToolbarBtn && toolbarElement) {
     } else {
         editor.value = SAMPLE;
     }
+    // Restore Theme
+    const savedTheme = localStorage.getItem('livemark_theme');
+    if (savedTheme && (savedTheme === 'dark' || savedTheme === 'light')) {
+        currentTheme = savedTheme;
+        document.documentElement.setAttribute('data-theme', currentTheme);
+        document.getElementById('icon-moon').style.display = currentTheme === 'dark' ? '' : 'none';
+        document.getElementById('icon-sun').style.display = currentTheme === 'light' ? '' : 'none';
+        document.getElementById('hljs-theme-dark').disabled = currentTheme === 'light';
+        document.getElementById('hljs-theme-light').disabled = currentTheme === 'dark';
+        mermaid.initialize({ startOnLoad: false, theme: currentTheme === 'dark' ? 'dark' : 'default', securityLevel: 'loose' });
+    }
+
+    // Restore Layout & Flipped
+    const savedLayout = localStorage.getItem('livemark_layout');
+    const savedFlipped = localStorage.getItem('livemark_flipped') === 'true';
+    if (savedLayout) {
+        setLayout(savedLayout, savedFlipped);
+        const map = { 'h-false': 'layout-lr', 'h-true': 'layout-rl', 'v-false': 'layout-tb', 'v-true': 'layout-bt' };
+        const key = `${savedLayout}-${savedFlipped}`;
+        if (map[key]) {
+            setActiveLayout(map[key]);
+        }
+    }
+
+    // Restore Sync Scroll
+    const savedSync = localStorage.getItem('livemark_sync_enabled');
+    if (savedSync !== null) {
+        syncEnabled = savedSync === 'true';
+        document.getElementById('sync-btn').classList.toggle('active', syncEnabled);
+    }
+
+    // Restore Spell Check
+    const savedSpell = localStorage.getItem('livemark_spell_check_enabled');
+    if (savedSpell !== null) {
+        spellCheckEnabled = savedSpell === 'true';
+        editor.setAttribute('spellcheck', spellCheckEnabled);
+        const spellBtn = document.getElementById('spellcheck-btn');
+        if (spellBtn) {
+            spellBtn.textContent = `Spell: ${spellCheckEnabled ? 'ON' : 'OFF'}`;
+            spellBtn.classList.toggle('active', spellCheckEnabled);
+        }
+    }
+
+    // Restore Font Family
+    const savedFontFamily = localStorage.getItem('livemark_font_family');
+    if (savedFontFamily && fontFamilyMap[savedFontFamily]) {
+        document.getElementById('preview-font-select').value = savedFontFamily;
+        document.getElementById('preview').style.fontFamily = fontFamilyMap[savedFontFamily];
+    }
+
+    // Restore Font Size
+    const savedFontSize = localStorage.getItem('livemark_font_size');
+    if (savedFontSize) {
+        document.getElementById('preview-font-size').value = savedFontSize;
+        document.getElementById('preview').style.fontSize = savedFontSize + 'px';
+        document.getElementById('preview-font-size-label').textContent = savedFontSize + 'px';
+    }
+
     renderPreview();
     updateLineNumbers();
     updateStatusBar();
