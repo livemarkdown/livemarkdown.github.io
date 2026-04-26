@@ -841,28 +841,109 @@ function exportMd() {
     download(blob, 'document.md');
 }
 
-function exportHtml() {
-    const style = `
+async function exportHtml() {
+    showToast('Preparing HTML…');
+    
+    const wasDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    let overlay = null;
+    
+    try {
+        if (wasDark) {
+            // Create a dark overlay to prevent flashing
+            overlay = document.createElement('div');
+            overlay.style.position = 'fixed';
+            overlay.style.top = '0';
+            overlay.style.left = '0';
+            overlay.style.width = '100vw';
+            overlay.style.height = '100vh';
+            overlay.style.backgroundColor = '#111318';
+            overlay.style.zIndex = '10000';
+            overlay.style.display = 'flex';
+            overlay.style.alignItems = 'center';
+            overlay.style.justifyContent = 'center';
+            overlay.style.color = '#e2e8f0';
+            overlay.style.fontFamily = 'sans-serif';
+            overlay.style.fontSize = '18px';
+            overlay.innerHTML = '<div>Generating HTML...</div>';
+            document.body.appendChild(overlay);
+
+            // Switch to light mode
+            document.documentElement.setAttribute('data-theme', 'light');
+            mermaid.initialize({ startOnLoad: false, theme: 'default', securityLevel: 'loose' });
+            await renderPreview();
+        }
+        
+        const content = document.getElementById('preview-content').innerHTML;
+        const computedStyle = window.getComputedStyle(preview);
+        const fontFamily = computedStyle.fontFamily;
+        const fontSize = computedStyle.fontSize;
+        
+        const basePath = window.location.href.substring(0, window.location.href.lastIndexOf('/'));
+
+        const html = `<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exported Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;1,400&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css" />
+    <link rel="stylesheet" href="${basePath}/style.css" />
+    <link rel="stylesheet" href="./style.css" />
     <style>
-      body { font-family: 'Georgia', serif; max-width: 800px; margin: 40px auto; padding: 0 20px; color: #1a1a1a; line-height: 1.75; }
-      h1,h2,h3,h4,h5,h6 { font-family: sans-serif; margin: 1.4em 0 0.5em; }
-      h1 { border-bottom: 2px solid #f59e0b; padding-bottom: 0.3em; }
-      h2 { border-bottom: 1px solid #ddd; padding-bottom: 0.25em; }
-      code { background: #f3f4f6; padding: 2px 6px; border-radius: 3px; font-family: monospace; }
-      pre { background: #1e1e1e; color: #d4d4d4; padding: 16px; border-radius: 6px; overflow-x: auto; }
-      pre code { background: none; color: inherit; }
-      blockquote { border-left: 3px solid #f59e0b; margin: 1em 0; padding: 6px 0 6px 18px; color: #555; }
-      table { border-collapse: collapse; width: 100%; }
-      th, td { border: 1px solid #ddd; padding: 8px 12px; }
-      th { background: #f3f4f6; font-weight: 600; }
-      img { max-width: 100%; }
-      a { color: #0ea5e9; }
-      hr { border: none; height: 2px; background: linear-gradient(90deg,#f59e0b,transparent); margin: 2em 0; }
+        
+        html, body {
+            background: #ffffff !important;
+            color: #1a1a1a !important;
+            height: auto !important;
+            overflow: visible !important;
+        }
+        body {
+            font-family: ${fontFamily};
+            font-size: ${fontSize};
+            line-height: 1.75;
+            padding: 0;
+            margin: 0;
+        }
+        #preview-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 28px 32px 60px;
+            background: #ffffff !important;
+        }
+        .markdown-body {
+            background: #ffffff !important;
+            color: #1a1a1a !important;
+            padding: 0 !important;
+        }
+        pre {
+            white-space: pre-wrap !important;
+            word-wrap: break-word !important;
+        }
+        .copy-btn {
+            display: none !important;
+        }
     </style>
-  `;
-    const html = `<!DOCTYPE html>\n<html lang="en">\n<head>\n<meta charset="UTF-8">\n<meta name="viewport" content="width=device-width,initial-scale=1">\n<title>Document</title>\n${style}\n</head>\n<body>\n${preview.innerHTML}\n</body>\n</html>`;
-    const blob = new Blob([html], { type: 'text/html' });
-    download(blob, 'document.html');
+</head>
+<body class="markdown-body">
+    <div id="preview-content">
+        ${content}
+    </div>
+</body>
+</html>`;
+
+        const blob = new Blob([html], { type: 'text/html' });
+        download(blob, 'document.html');
+        
+    } finally {
+        if (wasDark) {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            mermaid.initialize({ startOnLoad: false, theme: 'dark', securityLevel: 'loose' });
+            await renderPreview();
+            if (overlay) overlay.remove();
+        }
+    }
 }
 
 function exportPdf() {
