@@ -20,6 +20,7 @@
 ## Features
 
 ### Editor
+- **Multi-file tabs**: work on multiple files simultaneously with separate state persistence
 - **Real-time preview**: renders as you type with a smooth 120ms debounce
 - **Line numbers**: synced to scroll position
 - **Find & replace**: `Ctrl+F`, live highlight overlay in the editor, prev/next navigation, replace one or all
@@ -58,11 +59,13 @@
 
 | Shortcut | Action |
 | :--- | :--- |
+| `Ctrl + S` | Save active file (clears modified indicator) |
+| `Alt + N` | Create new file tab |
+| `Alt + W` | Close active file tab |
 | `Ctrl + F` | Open find & replace bar |
 | `?` | Open keyboard shortcuts panel |
 | `Esc` | Close dialogs / exit fullscreen |
 | `Tab` | Insert 2-space soft indent |
-| `Ctrl + S` | No-op — content is auto-saved |
 
 ---
 
