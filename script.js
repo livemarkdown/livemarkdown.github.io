@@ -862,6 +862,24 @@ document.addEventListener('keydown', e => {
         e.preventDefault();
         toggleFind();
     }
+    if (e.key === 's' && (e.ctrlKey || e.metaKey)) {
+        e.preventDefault();
+        const active = getActiveFile();
+        if (active) {
+            active.content = editor.value;
+            markFileSaved(activeFileId);
+            showToast(`Saved "${active.name}"`);
+        }
+    }
+    if (e.key === 'n' && e.altKey) {
+        e.preventDefault();
+        createFile('Untitled.md', '');
+        showToast('Created new file');
+    }
+    if (e.key === 'w' && e.altKey) {
+        e.preventDefault();
+        closeFile(activeFileId);
+    }
     if (e.key === 'Escape') {
         if (fsMode) {
             document.body.classList.remove('fullscreen-editor', 'fullscreen-preview');
@@ -946,9 +964,12 @@ document.getElementById('spellcheck-btn').addEventListener('click', function () 
 
 /* ─── Keyboard Shortcuts Panel ───────────────────────────────── */
 const SHORTCUTS = [
+    { section: 'Files' },
+    { key: 'Ctrl + S', desc: 'Save file (removes modified dot)' },
+    { key: 'Alt + N', desc: 'New file' },
+    { key: 'Alt + W', desc: 'Close active file' },
     { section: 'Editor' },
     { key: 'Ctrl + F', desc: 'Find & replace' },
-    { key: 'Ctrl + S', desc: 'No-op (auto-saved)' },
     { key: 'Tab', desc: 'Indent 2 spaces' },
     { key: 'Escape', desc: 'Close find bar / exit fullscreen' },
     { section: 'Format' },
@@ -959,7 +980,6 @@ const SHORTCUTS = [
     { key: 'Toolbar: H1–3', desc: 'Heading levels' },
     { section: 'Navigation' },
     { key: '?', desc: 'Open this shortcuts panel' },
-    { key: 'Ctrl + F', desc: 'Open find & replace' },
     { section: 'View' },
     { key: 'Fullscreen ⛶', desc: 'Toggle editor or preview fullscreen' },
     { key: 'Escape', desc: 'Exit fullscreen' },
