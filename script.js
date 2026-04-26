@@ -946,9 +946,124 @@ async function exportHtml() {
     }
 }
 
-function exportPdf() {
-    showToast('Opening print dialog…');
-    setTimeout(() => window.print(), 300);
+async function exportPdf() {
+    showToast('Preparing PDF…');
+    
+    const wasDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    let overlay = null;
+    
+    try {
+        if (wasDark) {
+            // Create a dark overlay to prevent flashing
+            overlay = document.createElement('div');
+            overlay.style.position = 'fixed';
+            overlay.style.top = '0';
+            overlay.style.left = '0';
+            overlay.style.width = '100vw';
+            overlay.style.height = '100vh';
+            overlay.style.backgroundColor = '#111318';
+            overlay.style.zIndex = '10000';
+            overlay.style.display = 'flex';
+            overlay.style.alignItems = 'center';
+            overlay.style.justifyContent = 'center';
+            overlay.style.color = '#e2e8f0';
+            overlay.style.fontFamily = 'sans-serif';
+            overlay.style.fontSize = '18px';
+            overlay.innerHTML = '<div>Generating PDF...</div>';
+            document.body.appendChild(overlay);
+
+            // Switch to light mode
+            document.documentElement.setAttribute('data-theme', 'light');
+            mermaid.initialize({ startOnLoad: false, theme: 'default', securityLevel: 'loose' });
+            await renderPreview();
+        }
+        
+        const printWindow = window.open('', '_blank');
+        if (!printWindow) {
+            showToast('Popup blocked! Please allow popups.');
+            return;
+        }
+
+        const content = document.getElementById('preview-content').innerHTML;
+    const computedStyle = window.getComputedStyle(preview);
+    const fontFamily = computedStyle.fontFamily;
+    const fontSize = computedStyle.fontSize;
+
+    const html = `<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exported Document</title>
+    <base href="${window.location.href}">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;1,400&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css" />
+    <link rel="stylesheet" href="./style.css" />
+    <style>
+        @page {
+            size: A4;
+            margin: 20mm;
+        }
+        html, body {
+            background: #ffffff !important;
+            color: #1a1a1a !important;
+            height: auto !important;
+            overflow: visible !important;
+        }
+        body {
+            font-family: ${fontFamily};
+            font-size: ${fontSize};
+            line-height: 1.75;
+            padding: 0;
+            margin: 0;
+        }
+        #preview-content {
+            max-width: 740px;
+            margin: 0 auto;
+            padding: 28px 32px 60px;
+            background: #ffffff !important;
+        }
+        .markdown-body {
+            background: #ffffff !important;
+            color: #1a1a1a !important;
+            padding: 0 !important;
+        }
+        pre {
+            white-space: pre-wrap !important;
+            word-wrap: break-word !important;
+        }
+        .copy-btn {
+            display: none !important;
+        }
+    </style>
+</head>
+<body class="markdown-body">
+    <div id="preview-content">
+        ${content}
+    </div>
+    <script>
+        window.onload = function() {
+            setTimeout(() => {
+                window.print();
+            }, 500);
+        };
+    </script>
+</body>
+</html>`;
+
+        printWindow.document.open();
+        printWindow.document.write(html);
+        printWindow.document.close();
+        
+    } finally {
+        if (wasDark) {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            mermaid.initialize({ startOnLoad: false, theme: 'dark', securityLevel: 'loose' });
+            await renderPreview();
+            if (overlay) overlay.remove();
+        }
+    }
 }
 
 function download(blob, filename) {
