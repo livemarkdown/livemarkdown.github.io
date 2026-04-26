@@ -786,6 +786,41 @@ body.dragging.layout-v {
     margin: 0.2em 0
 }
 
+.markdown-body li:has(input[type="checkbox"]) {
+    list-style-type: none;
+    padding-left: 0;
+    margin-left: -1.2em;
+}
+
+.markdown-body li input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 1.2em;
+    height: 1.2em;
+    border: 2px solid var(--border);
+    border-radius: 4px;
+    background-color: var(--bg1);
+    cursor: default;
+    position: relative;
+    vertical-align: middle;
+    margin-top: -3px;
+    margin-right: 0.6em;
+    display: inline-block;
+    transition: all 0.2s ease;
+    opacity: 1 !important;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+}
+
+.markdown-body li input[type="checkbox"]:checked {
+    background-color: #2563eb !important;
+    border-color: #2563eb !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='4.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E") !important;
+    background-size: 85% 85%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
 .markdown-body table {
     width: 100%;
     border-collapse: collapse;
