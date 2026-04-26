@@ -321,32 +321,7 @@
 
         <!-- Editor Pane -->
         <div class="pane" id="editor-pane">
-            <div class="pane-header">
-                <div class="pane-header-label">
-                    <div class="pane-dot" style="background:var(--accent)"></div>
-                    EDITOR
-                </div>
-                <!-- Fullscreen button -->
-                <div class="pane-actions">
-                    <button class="pane-btn" id="btn-fullscreen-editor" title="Fullscreen editor">
-                        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M1 4V1h3M8 1h3v3M11 8v3H8M4 11H1V8" />
-                        </svg>
-                    </button>
-                </div>
-                <!-- Toolbar hide/show button -->
-                <div class="pane-actions">
-                    <button class="pane-btn border" id="btn-toggle-toolbar" title="Toggle toolbar">
-                        <svg id="toolbar-toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="m18 15-6-6-6 6" />
-                        </svg>
-                    </button>
-                </div>
-            </div>
-
-            <!-- ─── Tab Bar ──────────────────────────────────────────────── -->
-            <div id="tab-bar">
+            <div class="pane-header" id="tab-bar">
                 <button class="tab-scroll-btn tab-scroll-left" id="tab-scroll-left" title="Scroll tabs left">
                     <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 2L4 6l4 4"/></svg>
                 </button>
@@ -357,6 +332,19 @@
                 <button class="tab-new-btn" id="tab-new" title="New file">
                     <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2v8M2 6h8"/></svg>
                 </button>
+                <div class="pane-actions">
+                    <button class="pane-btn" id="btn-fullscreen-editor" title="Fullscreen editor">
+                        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M1 4V1h3M8 1h3v3M11 8v3H8M4 11H1V8" />
+                        </svg>
+                    </button>
+                    <button class="pane-btn border" id="btn-toggle-toolbar" title="Toggle toolbar">
+                        <svg id="toolbar-toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m18 15-6-6-6 6" />
+                        </svg>
+                    </button>
+                </div>
             </div>
 
             <!-- ─── Toolbar ─────────────────────────────────────────────── -->

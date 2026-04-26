@@ -505,7 +505,7 @@ body.dragging.layout-v {
 
 /* pane header */
 .pane-header {
-    height: 32px;
+    height: 34px;
     display: flex;
     align-items: center;
     padding: 0 12px;
@@ -540,6 +540,12 @@ body.dragging.layout-v {
     margin-left: auto
 }
 
+#tab-bar .pane-actions {
+    align-items: center;
+    padding: 0 8px;
+    border-left: 1px solid var(--border);
+}
+
 .pane-btn {
     width: 22px;
     height: 22px;
@@ -566,13 +572,9 @@ body.dragging.layout-v {
 
 /* ─── Tab Bar ────────────────────────────────────────────────── */
 #tab-bar {
-    display: flex;
+    padding: 0;
+    gap: 0;
     align-items: stretch;
-    height: 34px;
-    background: var(--bg2);
-    border-bottom: 1px solid var(--border);
-    flex-shrink: 0;
-    position: relative;
 }
 
 .tab-list {
@@ -608,6 +610,9 @@ body.dragging.layout-v {
     max-width: 180px;
     position: relative;
     transition: background var(--transition), color var(--transition);
+    text-transform: none;
+    letter-spacing: normal;
+    font-weight: 500;
 }
 
 .tab:hover {
