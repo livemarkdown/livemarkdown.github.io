@@ -557,7 +557,8 @@ body.dragging.layout-v {
 }
 
 .pane-btn:first-child {
-    border-left: none; /* First button inside .pane-actions doesn't need left border since parent has it */
+    border-left: none;
+    /* First button inside .pane-actions doesn't need left border since parent has it */
 }
 
 .pane-btn:hover {
@@ -741,6 +742,11 @@ body.dragging.layout-v {
 .tab-new-btn svg {
     width: 12px;
     height: 12px;
+}
+
+#toolbar-toggle-icon {
+    width: 16px;
+    height: 16px;
 }
 
 /* ─── Editor ─────────────────────────────────────────────────── */
