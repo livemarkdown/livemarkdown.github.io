@@ -99,6 +99,12 @@ async function renderPreview() {
 
         preview.innerHTML = html;
 
+        // Make all links open in a new tab
+        preview.querySelectorAll('a').forEach(a => {
+            a.setAttribute('target', '_blank');
+            a.setAttribute('rel', 'noopener noreferrer');
+        });
+
         // Run mermaid
         const mermaidEls = preview.querySelectorAll('.mermaid');
         if (mermaidEls.length) {
