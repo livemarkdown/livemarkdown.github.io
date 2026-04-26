@@ -508,9 +508,8 @@ body.dragging.layout-v {
 .pane-header {
     height: 34px;
     display: flex;
-    align-items: center;
-    padding: 0 12px;
-    gap: 8px;
+    align-items: stretch;
+    padding: 0;
     background: var(--bg2);
     border-bottom: 1px solid var(--border);
     flex-shrink: 0;
@@ -525,7 +524,8 @@ body.dragging.layout-v {
     display: flex;
     align-items: center;
     gap: 6px;
-    flex: 1
+    flex: 1;
+    padding-left: 12px;
 }
 
 .pane-dot {
@@ -537,33 +537,32 @@ body.dragging.layout-v {
 
 .pane-actions {
     display: flex;
-    gap: 3px;
-    margin-left: auto
-}
-
-#tab-bar .pane-actions {
-    align-items: center;
-    padding: 0 8px;
+    margin-left: auto;
+    align-items: stretch;
     border-left: 1px solid var(--border);
 }
 
 .pane-btn {
-    width: 22px;
-    height: 22px;
+    width: 30px;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     border: none;
+    border-left: 1px solid var(--border);
     background: transparent;
     color: var(--text3);
     cursor: pointer;
-    border-radius: 3px;
     transition: all var(--transition);
+}
+
+.pane-btn:first-child {
+    border-left: none; /* First button inside .pane-actions doesn't need left border since parent has it */
 }
 
 .pane-btn:hover {
     background: var(--bg3);
-    color: var(--text)
+    color: var(--accent);
 }
 
 .pane-btn svg {
