@@ -850,32 +850,82 @@ document.querySelectorAll('.export-item').forEach(item => {
 });
 
 function getExportFileName(defaultExt) {
-    const h1 = preview.querySelector('h1');
-    let defaultName = 'document';
-    if (h1) {
-        const text = h1.textContent.trim().replace(/[/\\?%*:|"<>]/g, '');
-        if (text) defaultName = text;
-    }
-    const filename = prompt('Enter filename:', defaultName);
-    if (filename === null) return null; // Cancelled
-    let cleanName = filename.trim().replace(/[/\\?%*:|"<>]/g, '');
-    if (!cleanName) cleanName = 'document';
-    
-    if (!cleanName.toLowerCase().endsWith('.' + defaultExt.toLowerCase())) {
-        cleanName += '.' + defaultExt;
-    }
-    return cleanName;
+    return new Promise((resolve) => {
+        const h1 = preview.querySelector('h1');
+        let defaultName = 'livemarkdown-document';
+        if (h1) {
+            const text = h1.textContent.trim().replace(/[/\\?%*:|"<>]/g, '');
+            if (text) defaultName = text;
+        }
+
+        const container = document.createElement('div');
+        const label = document.createElement('label');
+        label.textContent = 'Enter filename:';
+        label.style.color = 'var(--text-muted)';
+        label.style.fontSize = '12px';
+        
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.value = defaultName;
+        input.className = 'modal-input';
+        
+        container.appendChild(label);
+        container.appendChild(input);
+
+        const actions = [
+            {
+                label: 'Cancel',
+                cls: 'btn',
+                action: () => {
+                    closeModal();
+                    resolve(null);
+                }
+            },
+            {
+                label: 'Export',
+                cls: 'btn btn-accent',
+                action: () => {
+                    let cleanName = input.value.trim().replace(/[/\\?%*:|"<>]/g, '');
+                    if (!cleanName) cleanName = 'livemarkdown-document';
+                    
+                    if (!cleanName.toLowerCase().endsWith('.' + defaultExt.toLowerCase())) {
+                        cleanName += '.' + defaultExt;
+                    }
+                    closeModal();
+                    resolve(cleanName);
+                }
+            }
+        ];
+
+        showModal(`Export as .${defaultExt.toUpperCase()}`, container, actions);
+        
+        setTimeout(() => {
+            input.focus();
+            input.select();
+        }, 100);
+
+        input.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                actions[1].action();
+            }
+            if (e.key === 'Escape') {
+                e.preventDefault();
+                actions[0].action();
+            }
+        });
+    });
 }
 
-function exportMd() {
-    const filename = getExportFileName('md');
+async function exportMd() {
+    const filename = await getExportFileName('md');
     if (!filename) return;
     const blob = new Blob([editor.value], { type: 'text/markdown' });
     download(blob, filename);
 }
 
 async function exportHtml() {
-    const filename = getExportFileName('html');
+    const filename = await getExportFileName('html');
     if (!filename) return;
     showToast('Preparing HTML…');
     
@@ -982,7 +1032,7 @@ async function exportHtml() {
 }
 
 async function exportPdf() {
-    const filename = getExportFileName('pdf');
+    const filename = await getExportFileName('pdf');
     if (!filename) return;
     showToast('Preparing PDF…');
     
@@ -1168,7 +1218,13 @@ function formatMarkdown(md) {
 /* ─── Modal ──────────────────────────────────────────────────── */
 function showModal(title, body, actions) {
     document.getElementById('modal-title').textContent = title;
-    document.getElementById('modal-body').textContent = body;
+    const bodyDiv = document.getElementById('modal-body');
+    if (typeof body === 'string') {
+        bodyDiv.textContent = body;
+    } else {
+        bodyDiv.innerHTML = '';
+        bodyDiv.appendChild(body);
+    }
     const actionsDiv = document.getElementById('modal-actions');
     actionsDiv.innerHTML = '';
     actions.forEach(a => {

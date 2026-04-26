@@ -1059,6 +1059,25 @@ body.fullscreen-preview #toolbar {
     justify-content: flex-end
 }
 
+.modal-input {
+    width: 100%;
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--bg);
+    color: var(--text);
+    font-size: 14px;
+    outline: none;
+    box-sizing: border-box;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    margin-top: 8px;
+}
+
+.modal-input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px rgba(9, 133, 242, 0.2);
+}
+
 /* ─── Toast ──────────────────────────────────────────────────── */
 #toast {
     position: fixed;
